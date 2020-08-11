@@ -58,18 +58,56 @@ A partir de las nuevas columnas creadas, se crean columnas que entregue la infor
 
 Finalmente, se ordena el \textit{dataset} con respecto a la fecha en que se descubrió.
 
+\subsection{Creación de nuevas categorías}\label{subsec:nuevas-cats}
+Más adelante se observará que existen categorías bastante mayoritarias frente a otras. Para solucionar este problema, se propondrá una recategorización, que consiste en hacer 4 nuevas categorías:
+\begin{itemize}
+    \item \textbf{Natural}: Causas naturales. \textit{Lightning} entra en esta categoría.
+    \item \textbf{Malicious}: Causas maliciosas. \textit{Arson} entra en esta categoría.
+    \item \textbf{Other}: Causas que no se especifican bien. \textbf{Miscellaneous} y \textbf{Missing/Undefined} entran en esta categoría
+    \item \textbf{Human}: Hecha por causas humanas, y que probablemente fueron accidente. El resto de clases entran en esta categoría.
+\end{itemize}
+
 \section{Análisis Exploratorio de los Datos}
-La primera pregunta que alguien se puede realizar es: ¿Cómo están distribuidos el número de incendios con respecto a la causa del incendio? Para responder a la interrogante, se procede a graficar el número de incendios con respecto a sus causas. El resultado del gráfico se puede observar en
+La primera pregunta que alguien se puede realizar es: ¿Cómo están distribuidos el número de incendios con respecto a la causa del incendio? Para responder a la interrogante, se procede a graficar el número de incendios con respecto a sus causas. El resultado del gráfico se puede observar en la Fig. \ref{fig:SCD}. 
 
 \begin{figure}
     \centering
-    \includegraphics[width=0.6\textwidth]{imagenes/barh_STAT_CAUSE_DESCR.pdf}
-    \caption{Caption}
-    \label{fig:my_label}
+    \includegraphics[width=0.48\textwidth]{imagenes/barh_STAT_CAUSE_DESCR.pdf}
+    \caption{Gráfico de Causas vs. Número de incendios.}
+    \label{fig:SCD}
 \end{figure}
 
-Visualizaciones y resultados relevantes.
+Se puede observar que las principales causas de incendio son producidos por rayos (\textit{Lightning}), quema de escombros (\textit{Debris Burning}), de forma miscelánea (\textit{Miscellaneous}) y por razones maliciosas (\textit{Arson}). Mientras que el resto de causas tienen un papel minoritario. 
 
-- Análisis exploratorio de datos, mostrar solo visualizaciones y resultados relevantes.
-- Lo realizado para la presentación 1 (que en algunos casos sería lo mismo del análisis exploratorio, o los primeros problemas que tuvieron con sus bases de datos o problemas)
-- Lo realizado para la presentación 2, que sería mostrar en algunos casos el primer experimento que realizaron para resolver su problema, o en otros sería plantear el por qué cambiaron su problema o base de datos.
+También, otra de las primeras observaciones que se pueden rescatar, es que el \textit{dataset} está \textit{desequilibrado} (i.e., que existen clases bastante más númerosas que otras). Esto causará que a la hora de realizar clasificación, las clases con mayor número de incendios (como \textit{Lightning}) queden beneficiadas frente a las clases minoritarias (como \textit{Structure}), resultando en \textit{overfitting}.
+
+Para solucionar este problema, se crearán 4 nuevas categorías, como se explica en \ref{subsec:nuevas-cats}. estas son: \textbf{Natural}, \textbf{Malicious}, \textbf{Other} y \textbf{Human}. Luego, se procede a graficar la nueva distribución, que se puede observar en la Fig. \ref{fig:SCDN}.
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.48\textwidth]{imagenes/barh_STAT_CAUSE_DESCR_.pdf}
+    \caption{Gráfico de Causas Nuevas vs. Número de incendios.}
+    \label{fig:SCDN}
+\end{figure}
+
+% Incluir la distribución de los datos c/r a los años
+
+% Incluir la distr. de los datos c/r a los años, identificando las categorías
+
+% Incluir la distr. de los datos c/r a los años, identificando las categorías (para la nueva categorización)
+
+
+
+
+
+
+
+
+
+
+
+% Visualizaciones y resultados relevantes.
+
+% - Análisis exploratorio de datos, mostrar solo visualizaciones y resultados relevantes.
+% - Lo realizado para la presentación 1 (que en algunos casos sería lo mismo del análisis exploratorio, o los primeros problemas que tuvieron con sus bases de datos o problemas)
+% - Lo realizado para la presentación 2, que sería mostrar en algunos casos el primer experimento que realizaron para resolver su problema, o en otros sería plantear el por qué cambiaron su problema o base de datos.
