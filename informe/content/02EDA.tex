@@ -1,0 +1,68 @@
+\section{Descripción de los Datos}
+
+Se cuenta con un \textit{dataset}, obtenido de \href{https://www.kaggle.com/rtatman/188-million-us-wildfires}{Kaggle}, con más de 1.88 millones de incendios históricos ocurridos en Estados Unidos, entre 1992 y 2015. La información original se obtuvo a partir del \textit{U.S. Department of Agriculture} \cite{FPA}.
+
+El \textit{dataset} posee 45 columnas, de las cuales ocuparemos aquellas que estén relacionadas con la fecha (como la hora y fecha estimada en que se inició el incendio y el momento en que se controló), con la geografía (como las siglas del estado en que se originó el incendio, y la latitud y longitud del incendio), el tamaño del incendio y la descripción de la causa del incendio (que es la variable objetivo a predecir). 
+
+El resto de variables no representan información relevante para predecir las causas de un incendio. Por ejemplo, el ID del incendio, o del departamento que logró controlar el incendió, no aporta información relevante a la causa del incendio (es más, puede resultar en un sesgo a la hora de predecir).
+
+Se describirán brevemente las columnas que ocuparemos:
+\begin{enumerate}
+    \item \textit{\textbf{FIRE\_YEAR}}: Corresponde al año en que se originó el incendio.Es una variable temporal.
+    \item \textit{\textbf{DISCOVERY\_DATE}}: Es la fecha (aproximada) en que se originó el incendio. Es una variable temporal que, inicialmente, es del tipo float.
+    \item \textit{\textbf{DISCOVERY\_TIME}}: Es la hora (aproximada) en que se originó el incendio. Es una variable temporal que, inicialmente, es de tipo cadena.
+    \item \textit{\textbf{STAT\_CAUSE\_DESCR}}: Es la causa que originó el incendio. Es una variable categórica de tipo cadena
+    \item \textit{\textbf{CONT\_DATE}}: Es la fecha en que se logró extinguir el incendio. Es una variable temporal que, inicialmente, es del tipo float.
+    \item \textit{\textbf{CONT\_TIME}}: Es la hora en que se logró extinguir el incendio. Es una variable temporal que, inicialmente, es de tipo cadena.
+    \item \textit{\textbf{FIRE\_SIZE}}: Es la extensión (área) que tuvo el incendio (medido en Acres). Es una variable numérica.
+    \item \textit{\textbf{FIRE\_SIZE\_CLASS}}: Es una clasificación que utilizan los bomberos para describir la extensión del incendio. Es una variable categórica.
+    \item \textit{\textbf{LATITUDE}}: Es la latitud del incendio. Es una variable numérica.
+    \item \textit{\textbf{LONGITUDE}}: Es la longitud del incendio. Es una variable numérica.
+    \item \textit{\textbf{STATE}}: Es el estado en que se originó el incendio. Es una variable categórica.
+\end{enumerate}
+
+Dentro de las columnas mencionadas anteriormente, la columna objetivo será \textit{\textbf{STAT\_CAUSE\_DESCR}}. Las categorías que posee son:
+\begin{itemize}
+    \item \textbf{Miscellaneous}: Misceláneo.
+    \item \textbf{Children}: Causado por infantes.
+    \item \textbf{Lightning}: Causado por un rayo.
+    \item \textbf{Smoking}: Causado por un cigarro mal apagado.
+    \item \textbf{Arson}: Causado con fines maliciosos.
+    \item \textbf{Equipment Use}
+    \item \textbf{Debris Burning}: Causado por quema de escombros.
+    \item \textbf{Campfire}: Causado por un campamento.
+    \item \textbf{Railroad}: Causado por un ferrocarril.
+    \item \textbf{Missing/Undefined}: Que tiene datos faltantes o que no están definidos.
+    \item \textbf{Powerline}: Causado por la linea eléctrica.
+    \item \textbf{Fireworks}: Causado por fuegos artificiales.
+    \item \textbf{Structure}: Causado por Estructura.
+\end{itemize}
+
+Cabe destacar que en la documentación no aparece específicamente una descripción específica de las categorías. Con lo que, varias de estas causas fueron inferidas.
+
+\section{Tratamiento de los Datos}
+\subsection{Primer acercamiento de los datos}
+En un primer acercamiento de los datos, se observo que existen 3535 filas duplicadas, los cuales se eliminan. 
+
+También, se observa que existen filas con valores nulos; específicamente, en las columnas \textit{\textbf{DISCOVERY\_TIME}}, \textit{\textbf{CONT\_DATE}} y \textit{\textbf{CONT\_DATE}}, siendo aproximadamente la mitad de las filas que poseen valores nulos. Estas filas se eliminan dada la gran cantidad de datos que posee el \textit{dataset}. 
+
+Después de esta limpieza preliminar de los datos, el \textit{dataset} queda con un total de 890821 datos en total (aproximadamente la mitad del dataset original).
+
+\subsection{Tratamiento de las columnas de fecha y hora}
+Tratando las columnas temporales, se puede observar que las fechas están en formato de fecha juliana\footnote{Esto corresponde al número de días transcurridos desde el mediodía del 1° de enero del año 4713 a. C.} y el tiempo está representado en formato cadena, con el patrón ``HHMM'', donde HH corresponde a las horas del día y MM corresponde a los minutos. 
+
+Para tratar con estos formatos, primero se transforma las fechas en formato gregoriano, y las horas se transforman en un formato más estándar, digamos, ``HH:MM:SS'', con SS los segundos. Paso seguido, se utiliza la fecha y la hora para transforlas en datos del tipo \textit{DateTime}. Esto se realiza para las columnas de sufijo \textit{\textbf{DISCOVERY\_*}} y \textit{\textbf{CONT\_*}}. De esta forma, 4 de las columnas que se tenían anteriormente, se resumen en dos columnas.
+
+\subsection{Creación de nuevas columnas}
+A partir de las nuevas columnas creadas, se crean columnas que entregue la información del mes del incendio (enero, febrero, marzo...), del día de la semana del incendio (lunes, martes...) y la hora del descubrimiento (esto es, si ocurrió a las 8, a las 13, etc...). Esto se hace tanto para la fecha de descubrimiento como la fecha en que se controló el incendio. Además, también se crea una nueva columna que informe el tiempo total en que se logró controlar el incendio. 
+
+Finalmente, se ordena el \textit{dataset} con respecto a la fecha en que se descubrió.
+
+\section{Análisis Exploratorio de los Datos}
+L
+
+Visualizaciones y resultados relevantes.
+
+- Análisis exploratorio de datos, mostrar solo visualizaciones y resultados relevantes.
+- Lo realizado para la presentación 1 (que en algunos casos sería lo mismo del análisis exploratorio, o los primeros problemas que tuvieron con sus bases de datos o problemas)
+- Lo realizado para la presentación 2, que sería mostrar en algunos casos el primer experimento que realizaron para resolver su problema, o en otros sería plantear el por qué cambiaron su problema o base de datos.
