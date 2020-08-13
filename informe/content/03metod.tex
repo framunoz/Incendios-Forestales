@@ -45,4 +45,9 @@ Cómo se habló en la sección~\ref{EDA}, existe un desbalance bastante importan
 
 % Escenario en que se considera los datos del último año y las nuevas categorías
 
+\subsection{Preparación del Conjunto de Entrenamiento y Test}
+Dado a que los datos tienen una dependencia temporal, se dividirá un conjunto de entrenamiento y un conjunto de test de forma que, el primer $90\%$ de los datos serán asignados al entrenamiento, y el $10\%$ restantes serán asignados para el test. 
+
+La razón de esta división es que se busca predecir el futuro en base al pasado, y si simplemente se toma una muestra aleatoria del \textit{dataset}, si después se busca predecir una causa, puede ``aprenderse'' la respuesta de antemano para decir la causa. Es más, esta fue una falla que se tuvo en la primera presentación.
+
 % Escenario en que se predicen solo las causas malévolas, o solo las causas humanas.
