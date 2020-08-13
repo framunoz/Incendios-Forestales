@@ -16,6 +16,8 @@
 % }
 \def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
     T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
+    
+\def\ColStyle#1{\textbf{\textit{#1}}}
 \begin{document}
 
 \title{Predicción de las Causas de los Incendios Forestales en EE.UU.}
@@ -29,28 +31,26 @@ femunoz@dim.uchile.cl}
 
 \maketitle
 
-% \begin{abstract}
-% This document is a model and instructions for \LaTeX.
-% This and the IEEEtran.cls file define the components of your paper [title, text, heads, etc.]. *CRITICAL: Do Not Use Symbols, Special Characters, Footnotes, 
-% or Math in Paper Title or Abstract.
-% \end{abstract}
+\begin{abstract}
+En este informe se explorarán métodos para predecir las causas que producen un incendio dados algunos parámetros del mismo, como lo es el origen geográfico del incendio, la fecha en que ocurrió, la extensión del incendio, entre otras cosas.
+\end{abstract}
 
 % \begin{IEEEkeywords}
 % component, formatting, style, styling, insert
 % \end{IEEEkeywords}
 
-\section{Introducción}
+
 \input{informe/content/01intro}
 
 \input{informe/content/02EDA}
 
-\section{Metodología}
+
 \input{informe/content/03metod}
 
-\section{Discusión}
+
 \input{informe/content/04disc}
 
-\section{Conclusión}
+
 \input{informe/content/05concl}
 
 \begin{thebibliography}{00}

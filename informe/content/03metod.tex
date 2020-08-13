@@ -1,6 +1,42 @@
+\section{Metodología}
+
 % - Dado lo encontrado en lo realizado anteriormente, plantear cómo podrían abordar los problemas obtenidos, mejorar métricas, cambios en la metodología, etc.
 
+\subsection{Modelos}
+Se propondrá cinco modelos para la clasificación, escogidos en base a los algoritmos vistos en el curso. Estos son: \textit{Naïve Bayes}, \textit{K-Vecinos más Cercanos}, \textit{Discriminante Lineal}, \textit{Discriminante Cuadrático} y \textit{Random Forest}
 
+\subsubsection{Preparación del modelo de Naïve Bayes}
+Para el modelo de \textit{Naïve Bayes}, no se seleccionarán hiperparámetros. Se asumirá un prior uniforme, pues de todas formas, se considera que se tienen suficientes datos como para que el prior se vuelva irrelevante. 
+
+\subsubsection{Preparación del modelo de K-NN}
+Para el modelo de los \textit{K-Vecinos más Cercanos}, se empezará por normalizar los datos y escogiendo con anterioridad un $k$ óptimo, de forma heurística. 
+
+La metodología para encontrar este $k$ óptimo, es probando con una lista finita de valores tentativos (e.g.: $k\in\{1, 10, 50, 100, 150, 200\}$) y evaluando cuál posee el mayor \textit{score}. Realizado esto, se procede a realizar una nueva iteración en la vecindad en que se encontraba el $k$ anterior (e.g.: si resultó que $k=50$ en el ejemplo anterior, entonces se probará en un conjunto acotado que esté entre $10$ y $100$).
+
+\subsubsection{Preparación del modelo lineal/cuadrático}
+No se realizará una preparación previa para estos modelos, ni se ajustarán sus hiperparámetros.
+
+\subsubsection{Preparación del modelo de Random Forest}
+Dada a la gran cantidad de datos que posee el dataset, y al gran costo computacional que supone este algoritmo, resulta muy difícil ajustar los hiperparámetros que posee, con lo que se prefiere conservar los hiperparámetros que viene por defecto con el modelo.
+
+% Cabe destacar que la forma en que se encontrará el $k$ óptimo para el algoritmo de \textit{KNN} será de manera Heurística, es decir, se probará primero con un conjunto de tentativo para los $k$, y se escogerá el $k$ de forma que maximice la puntuación de este clasificador. Mientras que los hiperparámetros del \textit{Random Forest} serán los que viene por defecto en la librería de \textit{sklearn}.
+
+% \subsection{Validación}
+
+\subsection{Escenarios}
+Se propondrá distintos escenarios en los que se aplicarán los cinco modelos descritos anteriormente.
+
+\subsubsection{Todos los datos}
+En este escenario se considerarán todos los datos que contiene el \textit{dataset} posterior a su depuración, sin realizar un ``preprocesamiento''. Se realizará esto para comparar la eficiencia que poseen los otros escenarios frente a ``no realizar nada''.
+
+\subsubsection{A partir del año 2011}
+
+Como se observó en la Fig.~\ref{fig:Year-Ocurr}, ocurre una alza importante en estos años, dando una regularidad significativa frente a los años anteriores. Es por esto que se probarán los distintos modelos en el escenario de los últimos años a partir del 2011.
+
+\subsubsection{Agrupación de las categorías}
+Cómo se habló en la sección~\ref{EDA}, existe un desbalance bastante importante en las categorías de las causas de un incendio. Es por esto que se considerará en realizar una recategorización de los datos y además, al igual que en el escenario anterior, se considerarán los últimos años a partir de 2011.
+
+% \subsubsection{}
 
 
 % Escenario en que no se tocan mucho los datos

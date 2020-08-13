@@ -1,16 +1,24 @@
-\section{Descripción de los Datos}
+\section{Descripción de los Datos} \label{descr-datos}
 
-Se cuenta con un \textit{dataset}, obtenido de \href{https://www.kaggle.com/rtatman/188-million-us-wildfires}{Kaggle}, con más de 1.88 millones de incendios históricos ocurridos en Estados Unidos, entre 1992 y 2015. La información original se obtuvo a partir del \textit{U.S. Department of Agriculture} \cite{FPA}.
+\subsection{Descripción preliminar de los datos}
 
-El \textit{dataset} posee 45 columnas, de las cuales ocuparemos aquellas que estén relacionadas con la fecha (como la hora y fecha estimada en que se inició el incendio y el momento en que se controló), con la geografía (como las siglas del estado en que se originó el incendio, y la latitud y longitud del incendio), el tamaño del incendio y la descripción de la causa del incendio (que es la variable objetivo a predecir). 
+Se cuenta con un \textit{dataset}, obtenido de \href{https://www.kaggle.com/rtatman/188-million-us-wildfires}{Kaggle}, con un registro de 1.880.465 incendios históricos ocurridos en Estados Unidos, desde 1992 hasta 2015. La información original se obtuvo a partir del \textit{U.S. Department of Agriculture} \cite{FPA}.
 
-El resto de variables no representan información relevante para predecir las causas de un incendio. Por ejemplo, el ID del incendio, o del departamento que logró controlar el incendió, no aporta información relevante a la causa del incendio (es más, puede resultar en un sesgo a la hora de predecir).
+El \textit{dataset} se encuentra en extensión \textit{.sqlite}, de donde ocuparemos la tabla ``\textit{Fires}'', que posee en total 37 columnas, dentro de las cuales, existen columnas para describir el ID (como lo es \textit{\textbf{FOD\_ID}} O \textit{\textbf{FPA\_ID}}), las siglas (como lo es \textit{\textbf{STATE}}), los nombres (como lo es \textit{\textbf{SOURCE\_SYSTEM\_TYPE}}), algunos parámetros numéricos (como lo es \textit{\textbf{FIRE\_SIZE}}), parámetros temporales (como lo es \textit{\textbf{CONT\_DATE}} o \textit{\textbf{CONT\_TIME}}), parámetros espaciales (como lo es \textit{\textbf{LATITUDE}}), entre otros (que no viene al caso describir cada una de las columnas del \textit{dataset}, dada a la cantidad abrumadora que posee). Dentro de las cuales, la columna de etiquetas que se desea predecir es la llamada \textit{\textbf{STAT\_CAUSE\_DESCR}}.
 
-Se describirán brevemente las columnas que ocuparemos:
+Para más información acerca de las columnas del \textit{dataset}, se puede consultar la documentación proporcionada en la página de Kaggle.
+
+\subsection{Descripción de las columnas a ocupar}
+
+Del total de columnas que posee la tabla, ocuparemos aquellas que estén relacionadas con la fecha (como la hora y fecha estimada en que se inició el incendio y el momento en que se controló), con la geografía (como las siglas del estado en que se originó el incendio, y la latitud y longitud del incendio), el tamaño del incendio y la descripción de la causa del incendio (que es la variable objetivo a predecir). 
+
+El resto de variables no representan información relevante para predecir las causas de un incendio. Por ejemplo, el ID del incendio, o del departamento que logró controlar el incendió, no aporta información importante a la causa del incendio, pues no es una propiedad ``\textit{natural}'' del mismo (es más, puede resultar en un sesgo a la hora de predecir).
+
+A continuación se describirán brevemente las columnas que se ocuparán:
 \begin{enumerate}
-    \item \textit{\textbf{FIRE\_YEAR}}: Corresponde al año en que se originó el incendio.Es una variable temporal.
-    \item \textit{\textbf{DISCOVERY\_DATE}}: Es la fecha (aproximada) en que se originó el incendio. Es una variable temporal que, inicialmente, es del tipo float.
-    \item \textit{\textbf{DISCOVERY\_TIME}}: Es la hora (aproximada) en que se originó el incendio. Es una variable temporal que, inicialmente, es de tipo cadena.
+    \item \textit{\textbf{FIRE\_YEAR}}: Corresponde al año en que se originó el incendio. Es una variable temporal.
+    \item \textit{\textbf{DISCOVERY\_DATE}}: Es la fecha (estimada) en que se originó el incendio. Es una variable temporal que, inicialmente, es del tipo float.
+    \item \textit{\textbf{DISCOVERY\_TIME}}: Es la hora (estimada) en que se originó el incendio. Es una variable temporal que, inicialmente, es de tipo cadena.
     \item \textit{\textbf{STAT\_CAUSE\_DESCR}}: Es la causa que originó el incendio. Es una variable categórica de tipo cadena
     \item \textit{\textbf{CONT\_DATE}}: Es la fecha en que se logró extinguir el incendio. Es una variable temporal que, inicialmente, es del tipo float.
     \item \textit{\textbf{CONT\_TIME}}: Es la hora en que se logró extinguir el incendio. Es una variable temporal que, inicialmente, es de tipo cadena.
@@ -21,14 +29,29 @@ Se describirán brevemente las columnas que ocuparemos:
     \item \textit{\textbf{STATE}}: Es el estado en que se originó el incendio. Es una variable categórica.
 \end{enumerate}
 
-Dentro de las columnas mencionadas anteriormente, la columna objetivo será \textit{\textbf{STAT\_CAUSE\_DESCR}}. Las categorías que posee son:
+\subsection{Descripción del dataset con las columnas a ocupar} \label{descr-dataset}
+
+Restringido a las columnas mencionadas anteriormente, se observa que el \textit{dataset} posee un total de 3.535 filas duplicadas. 
+
+También se observa que las siguientes columnas poseen valores nulos: 
 \begin{itemize}
-    \item \textbf{Miscellaneous}: Misceláneo.
+    \item \ColStyle{DISCOVERY\_TIME}, con un total de 882.638 valores nulos,
+    \item \ColStyle{CONT\_DATE}, con un total de 891.531 valores nulos, y
+    \item \ColStyle{CONT\_TIME}, con un total de 972.173 valores nulos.
+\end{itemize}
+
+Además, se observa que las columnas relacionadas con las fechas se encuentran en un formato de fecha juliana\footnote{Esto corresponde al número de días transcurridos desde el mediodía del 1° de enero del año 4713 a. C.} y que las columnas relacionadas a las horas son cadenas, se encuentran en formato ``HHMM'', donde HH corresponde al número de horas y MM corresponde al número de minutos. Finalmente, cabe mencionar que la columna \ColStyle{FIRE\_SIZE} corresponde al área total en que se propagó el incendio, medido en Acres.
+
+\subsection{Descripción de las etiquetas de la columna objetivo}
+
+A continuación, describiremos brevemente las etiquetas que posee la columna que se desea predecir, \textit{\textbf{STAT\_CAUSE\_DESCR}}:
+\begin{itemize}
+    \item \textbf{Miscellaneous}: de causa Miscelánea.
     \item \textbf{Children}: Causado por infantes.
     \item \textbf{Lightning}: Causado por un rayo.
-    \item \textbf{Smoking}: Causado por un cigarro mal apagado.
+    \item \textbf{Smoking}: Causado por un cigarrillo mal apagado.
     \item \textbf{Arson}: Causado con fines maliciosos.
-    \item \textbf{Equipment Use}
+    \item \textbf{Equipment Use}: Causado por el uso de un equipamiento.
     \item \textbf{Debris Burning}: Causado por quema de escombros.
     \item \textbf{Campfire}: Causado por un campamento.
     \item \textbf{Railroad}: Causado por un ferrocarril.
@@ -38,23 +61,19 @@ Dentro de las columnas mencionadas anteriormente, la columna objetivo será \tex
     \item \textbf{Structure}: Causado por Estructura.
 \end{itemize}
 
-Cabe destacar que en la documentación no aparece específicamente una descripción específica de las categorías. Con lo que, varias de estas causas fueron inferidas.
+Cabe destacar, que en la documentación de la base de datos no aparece una descripción específica de las categorías. Con lo que, varias de las descripciones de estas causas fueron inferidas por el autor.
 
 \section{Tratamiento de los Datos}
-\subsection{Primer acercamiento de los datos}
-En un primer acercamiento de los datos, se observo que existen 3535 filas duplicadas, los cuales se eliminan. 
-
-También, se observa que existen filas con valores nulos; específicamente, en las columnas \textit{\textbf{DISCOVERY\_TIME}}, \textit{\textbf{CONT\_DATE}} y \textit{\textbf{CONT\_DATE}}, siendo aproximadamente la mitad de las filas que poseen valores nulos. Estas filas se eliminan dada la gran cantidad de datos que posee el \textit{dataset}. 
-
-Después de esta limpieza preliminar de los datos, el \textit{dataset} queda con un total de 890821 datos en total (aproximadamente la mitad del dataset original).
+\subsection{Limpieza preliminar de los datos}
+Como se comentó en la sección \ref{descr-dataset}, el \textit{dataset} posee algunas filas duplicadas y/o con valores nulos. Para remediar esto, se procede a eliminar estas filas, resultando en un \textit{dataset} de 890.821 filas, aproximadamente la mitad de filas que poseía el dataset originalmente.
 
 \subsection{Tratamiento de las columnas de fecha y hora}
-Tratando las columnas temporales, se puede observar que las fechas están en formato de fecha juliana\footnote{Esto corresponde al número de días transcurridos desde el mediodía del 1° de enero del año 4713 a. C.} y el tiempo está representado en formato cadena, con el patrón ``HHMM'', donde HH corresponde a las horas del día y MM corresponde a los minutos. 
+Como se comentó en la sección \ref{descr-dataset}, las fechas se encuentran en formato de fecha juliana, y el tiempo se encuentra en formato ``HHMM''.
 
-Para tratar con estos formatos, primero se transforma las fechas en formato gregoriano, y las horas se transforman en un formato más estándar, digamos, ``HH:MM:SS'', con SS los segundos. Paso seguido, se utiliza la fecha y la hora para transforlas en datos del tipo \textit{DateTime}. Esto se realiza para las columnas de sufijo \textit{\textbf{DISCOVERY\_*}} y \textit{\textbf{CONT\_*}}. De esta forma, 4 de las columnas que se tenían anteriormente, se resumen en dos columnas.
+Para tratar con estos formatos, primero se transforma las fechas en formato gregoriano, y las horas se transforman en un formato más estándar, digamos, ``HH:MM:SS'', con SS los segundos (donde como no se posee la información de los segundos, se rellenan con 00). Paso seguido, se utiliza la fecha y la hora para transforlas en datos del tipo \textit{DateTime}. Esto se realiza para las columnas de sufijo \textit{\textbf{DISCOVERY\_*}} y \textit{\textbf{CONT\_*}}. De esta forma, 4 de las columnas que se tenían anteriormente, se resumen en dos columnas, las cuales se nombraron \ColStyle{DISC\_DATE\_TIME} y \ColStyle{CONT\_DATE\_TIME}.
 
 \subsection{Creación de nuevas columnas}
-A partir de las nuevas columnas creadas, se crean columnas que entregue la información del mes del incendio (enero, febrero, marzo...), del día de la semana del incendio (lunes, martes...) y la hora del descubrimiento (esto es, si ocurrió a las 8, a las 13, etc...). Esto se hace tanto para la fecha de descubrimiento como la fecha en que se controló el incendio. Además, también se crea una nueva columna que informe el tiempo total en que se logró controlar el incendio. 
+A partir de las nuevas columnas creadas, se crean columnas que entregueN la información del mes del incendio (enero, febrero, marzo...), del día de la semana del incendio (lunes, martes...) y la hora del descubrimiento (esto es, si ocurrió a las 8, a las 13, etc...). Esto se hace tanto para la fecha de descubrimiento como la fecha en que se controló el incendio. Además, también se crea una nueva columna que informe el tiempo total en que se logró controlar el incendio. 
 
 Finalmente, se ordena el \textit{dataset} con respecto a la fecha en que se descubrió.
 
@@ -67,8 +86,8 @@ Más adelante se observará que existen categorías bastante mayoritarias frente
     \item \textbf{Human}: Hecha por causas humanas, y que probablemente fueron accidente. El resto de clases entran en esta categoría.
 \end{itemize}
 
-\section{Análisis Exploratorio de los Datos}
-La primera pregunta que alguien se puede realizar es: ¿Cómo están distribuidos el número de incendios con respecto a la causa del incendio? Para responder a la interrogante, se procede a graficar el número de incendios con respecto a sus causas. El resultado del gráfico se puede observar en la Fig. \ref{fig:SCD}. 
+\section{Análisis Exploratorio de los Datos}\label{EDA}
+La primera pregunta que alguien se puede realizar es: ¿Cómo están distribuidos el número de incendios con respecto a la causa del incendio? Para responder a la interrogante, se procede a graficar el número de incendios con respecto a sus causas. El resultado del gráfico se puede observar en la Fig.~\ref{fig:SCD}. 
 
 \begin{figure}
     \centering
@@ -90,9 +109,24 @@ Para solucionar este problema, se crearán 4 nuevas categorías, como se explica
     \label{fig:SCDN}
 \end{figure}
 
-% Incluir la distribución de los datos c/r a los años
+Otra interrogante fue: ¿Cómo se distribuyen los incendios a lo largo de los años? Para responder a esta interrogante, se elaboró el gráfico de la Fig. \ref{fig:Year-Ocurr}.
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.48\textwidth]{imagenes/YEAR_OCURRENCIA.pdf}
+    \caption{Gráfico de Número de incendios vs. Año de ocurrencia.}
+    \label{fig:Year-Ocurr}
+\end{figure}
+
+Las primeras apreciaciones que se observan es que en los últimos años (desde el 2011 hasta el 2015) se tuvo un alza de incendios. Quizás, esto se puede deber a que en los últimos años se cambió la forma en que se contabilizaban los incendios.
+
+Además, también se observa que hay años que son minoría comparativamente, como por ejemplo, en el año 2011 ocurrieron más del doble de incendios que en el año 1998. 
+
+Es importante tomar en cuenta estas observaciones, pues puede afectar en la predicción del clasificador en gran medida, pues este no estará consciente de las ``rachas'' de incendios que ocurrieron a lo largo de los años.
 
 % Incluir la distr. de los datos c/r a los años, identificando las categorías
+
+
 
 % Incluir la distr. de los datos c/r a los años, identificando las categorías (para la nueva categorización)
 

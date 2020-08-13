@@ -1,18 +1,36 @@
-
-
-
+\section{Introducción}
 
 % Introducción breve, solo una pequeña introducción a su problema (contexto), resumen de lo realizado en presentación 1 y 2 y lo hecho para el informe final más el cumplimiento de los objetivos que tenían.
 
 \subsection{Contexto y Motivación}
-En el último tiempo se ha visto una creciente en el número de incendios en todo el mundo. Cómo lo es en el caso de Chile, el Amazonas (Brasil) o Australia. Es por esto, que se planteó en utilizar las herramientas de Aprendizaje de Máquinas para poder ayudar a combatir y prevenir los incendios.
+En el último tiempo se ha visto que han ocurrido un gran número de incendios en todo el mundo. Cómo lo es en el caso de Chile, el Amazonas (Brasil) o Australia. Es por esto, que se planteó en utilizar las herramientas de Aprendizaje de Máquinas para poder ayudar a combatir y prevenir los incendios que están aconteciendo.
+
+En este trabajo se contará con un \textit{dataset} que cuenta con más de un millón y ochocientos mil incendios ocurridos en Estados Unidos de forma histórica. Una descripción más detallada acerca de los datos que se ocuparán se puede encontrar en \ref{descr-datos}.
+
+\subsection{Preguntas realizadas}
+Dadas algunas propiedades intrínsecas de un incendio, como lo es su ubicación geográfica, la fecha y hora de ocurrencia y algunos otros factores que se detallarán más adelante,
+\begin{itemize}
+    \item ¿Es posible predecir las causas de un incendio?
+    \item ¿Es posible saber si un incendio es causado por error humano, por la naturaleza o con fines maliciosos?
+\end{itemize}
 
 \subsection{Objetivos}
-En este trabajo se intentará plantear mecanismos para predecir las causas de un incendio, dadas algunas condiciones (como la fecha, el lugar en dónde ocurrió el incendio o el tiempo empleado en controlar el incendio).
-
-\subsection{Problema, preguntas realizadas e hipótesis}
-Las preguntas se quieren responder son las siguientes:
+Realizadas las preguntas a responder, se propondrán los siguientes objetivos:
 \begin{itemize}
-    \item Dada la hora, fecha, ubicación geográfica, área total del incendio y el tiempo necesario para extinguir un incendio. ¿Es posible predecir la causa del incendio?
-    \item Dadas las condiciones anteriores. ¿Es posible saber si un incendio fue causado por error humano, por la naturaleza o con fines maliciosos?
+    \item Predecir las causas específicas de un incendio dados los datos que nos entrega el \textit{dataset}.
+    \item Predecir las causas generales de un incendio dados los datos que nos entrega el \textit{dataset}.
 \end{itemize}
+
+\subsection{Resumen del trabajo realizado en la primera presentación}
+En la primera presentación se empezó a buscar algún proyecto interesante, en el que se pueda aplicar las herramientas aprendidas en el curso. 
+
+Escogido el tema, se plantearon las preguntas: ``\textit{¿Se puede predecir la extensión de un incendio?}'' Esta pregunta fue reemplazada con la pregunta ``\textit{¿Es posible predecir las causas de un incendio?}'' (se reemplazó pues se consideraba que para la primera pregunta se necesitan datos meteorológicos, los cuales no se cuenta actualmente).
+
+Luego, se empezaron a buscar base de datos interesantes, de forma que pueda responder a las preguntas. Finalmente, se encontraron dos bases de datos: la correspondiente a los incendios de Estados Unidos (la cual se encuentra bastante detallada) y la correspondiente a la de CONAF, que es chilena. Finalmente, se prefirió la base de datos de Estados Unidos, pues la base de datos chilena tiene muy pocos datos, además de que solamente se encuentra disponible en Excel, dificultando su respectiva extracción de datos.
+
+\subsection{Resumen del trabajo realizado en la segunda presentación}
+En la segunda presentación, se seleccionaron las columnas que se consideraran relevantes de la base de datos de Estados Unidos. Paso siguiente, se empezó a preparar el \textit{dataset} para su posterior manipulación, eliminando algunos datos que no fueran importantes (como los datos faltantes o los datos duplicados), modificando el formato de los datos y agregando nuevas columnas al dataset.
+
+Luego, se empezó realizando un análisis exploratorio de los datos, observando la distribución del número de incendios con respecto a las causas, a los estados (en el sentido de un estado de EE.UU.), a los días de la semana y con respecto a la hora. Luego se intentó observar la correlación entre las columnas.
+
+Finalmente, se implementaron algunos modelos básicos ocupando la base de datos.
