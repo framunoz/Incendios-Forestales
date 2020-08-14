@@ -101,7 +101,10 @@ Más adelante se observará que existen categorías bastante mayoritarias frente
     \caption{Gráfico de Causas vs. Número de incendios.}
     \label{fig:SCD}
 \end{figure}
+
 \section{Análisis Exploratorio de los Datos}\label{EDA}
+
+\subsection{Distribución de las causas de un incendio}
 La primera pregunta que alguien se puede realizar es: ¿Cómo están distribuidos el número de incendios con respecto a la causa del incendio? Para responder a la interrogante, se procede a graficar el número de incendios con respecto a sus causas. El resultado del gráfico se puede observar en la Fig.~\ref{fig:SCD}.
 
 Se puede observar que las principales causas de incendio son producidos por rayos (\textit{Lightning}), quema de escombros (\textit{Debris Burning}), de forma miscelánea (\textit{Miscellaneous}) y por razones maliciosas (\textit{Arson}). Mientras que el resto de causas tienen un papel minoritario. 
@@ -118,6 +121,7 @@ Para solucionar este problema, se crearán 4 nuevas categorías, como se explica
 
 Se puede observar a primera vista que la nueva categorización resulta en un \textit{dataset} más balanceado, y que además, la causa humana resulta ser la nueva clase mayoritaria.
 
+\subsection{Distribución de los incendios a lo largo de los años}
 Otra interrogante que se puede plantear es: ¿Cómo se distribuyen los incendios a lo largo de los años? Para responder a esta pregunta, se elaboró un gráfico del número de incendios vs. el año de ocurrencia. El resultado del gráfico se puede observar en la Fig.~\ref{fig:Year-Ocurr}.
 \begin{figure}
     \centering
@@ -132,7 +136,7 @@ Además, también se observa que hay años que son minoría comparativamente, co
 
 Es importante tomar en cuenta estas observaciones, pues puede afectar en la predicción del clasificador en gran medida, pues este no estará consciente de las ``rachas'' de incendios que ocurrieron en los últimos años.
 
-
+Luego, una interrogante natural que surge es: ¿Cómo se distribuyen las causas de los incendios a lo largo de los años? Para responder a esta pregunta, se 
 
 
 
