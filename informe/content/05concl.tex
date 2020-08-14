@@ -1,3 +1,13 @@
 \section{Conclusión}
 
-- Conclusión, importante es mencionar si es que pudieron resolver el problema planteado
+\subsection{Conclusión acerca del Escenario 1}
+Podemos observar que en el primer escenario, las predicciones de la mayoría de los modelos son insatisfactorias. Inclusive el modelo de \textit{Random Forest}, que posee un $45.6\%$ de exactitud, es un porcentaje relativamente bajo. 
+
+Esto se puede deber a que el modelo se aprendió ciertos patrones del pasado (digamos, de los años 1992 a 2010) para después ver que en los años futuros, todo el escenario cambió radicalmente, como se puede observar en la Fig.~\ref{fig:Year-Ocurr}.
+
+Además, de las Tablas \ref{tab:RF_Escenario 1} hasta la \ref{tab:NB_Escenario 1}, se observa que por lo usual, la causa \textbf{Lightning} es la que posee mayor \textit{recall}. Es lo esperable, pues es la causa con mayor número de incendios, y para los modelos le resulta más fácil decir que pertenece a la clase mayoritaria que a las clases minoritarias. A fin de cuentas, este Escenario sufre de un \textit{overfitting}.
+
+\subsection{Conclusión acerca del Escenario 2}
+
+
+\subsection{Conclusión acerca del Escenario 3}
